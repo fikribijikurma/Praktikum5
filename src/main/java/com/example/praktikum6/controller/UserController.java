@@ -1,18 +1,17 @@
 package com.example.praktikum6.controller;
 
-import com.example.praktikum6.Mahasiswa;
+import com.example.praktikum6.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class UserController {
-
-    // List statis untuk menyimpan data sementara
-    private static List<Mahasiswa> daftarMahasiswa = new ArrayList<>();
+    private static List<User> listMahasiswa = new ArrayList<>();
 
     @GetMapping("/")
     public String loginPage() {
@@ -20,34 +19,34 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String doLogin(@RequestParam String username, @RequestParam String password) {
-        // Logika sederhana: username admin, password bebas (sesuai instruksi: nim masing-masing)
-        if ("admin".equals(username)) {
+    public String login(@RequestParam String username, @RequestParam String password, RedirectAttributes redirectAttributes) {
+        // Password menggunakan NIM Anda
+        if ("admin".equals(username) && "20230140063".equals(password)) {
+            // Mengirim nama user ke redirect agar bisa dibaca di Home
+            redirectAttributes.addFlashAttribute("currentUser", "Auliya");
             return "redirect:/home";
         }
-        return "login";
+        redirectAttributes.addFlashAttribute("error", "Username atau Password Salah!");
+        return "redirect:/";
     }
 
     @GetMapping("/home")
-    public String homePage(Model model) {
-        model.addAttribute("listMhs", daftarMahasiswa);
+    public String homePage(Model model, @ModelAttribute("currentUser") String currentUser) {
+        model.addAttribute("mahasiswa", listMahasiswa);
+        // Jika flash attribute kosong, beri nama default
+        model.addAttribute("namaUser", (currentUser == null || currentUser.isEmpty()) ? "Admin" : currentUser);
         return "home";
     }
 
     @GetMapping("/form")
     public String formPage(Model model) {
-        model.addAttribute("mahasiswa", new Mahasiswa());
+        model.addAttribute("user", new User());
         return "form";
     }
 
     @PostMapping("/save")
-    public String saveData(@ModelAttribute Mahasiswa mahasiswa) {
-        daftarMahasiswa.add(mahasiswa);
+    public String saveUser(@ModelAttribute User user) {
+        listMahasiswa.add(user);
         return "redirect:/home";
-    }
-
-    @GetMapping("/logout")
-    public String logout() {
-        return "redirect:/";
     }
 }

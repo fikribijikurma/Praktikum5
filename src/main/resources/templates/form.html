@@ -1,30 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Form Input</title>
+    <title>Form Input Mahasiswa</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
-<body class="p-5">
-<div class="container border p-4 bg-light">
-    <h5>Form Input Mahasiswa</h5>
-    <form th:action="@{/save}" th:object="${mahasiswa}" method="post">
+<body class="bg-light p-5">
+<div class="container border p-4 bg-white" style="max-width: 600px;">
+    <h5 class="mb-4">Form Input Mahasiswa</h5>
+
+    <form th:action="@{/save}" th:object="${user}" method="post">
         <div class="mb-3">
-            <label>Nama:</label>
-            <input type="text" th:field="*{nama}" class="form-control" required>
+            <label class="form-label">Nama:</label>
+            <input type="text" th:field="*{nama}" class="form-control" placeholder="Masukkan Nama" required>
         </div>
+
         <div class="mb-3">
-            <label>NIM:</label>
-            <input type="text" th:field="*{nim}" class="form-control" required>
+            <label class="form-label">NIM:</label>
+            <input type="text" th:field="*{nim}" class="form-control" placeholder="Masukkan NIM" required>
         </div>
+
         <div class="mb-3">
-            <label>Jenis Kelamin:</label><br>
-            <input type="radio" th:field="*{jenisKelamin}" value="Laki-laki"> Laki-laki <br>
-            <input type="radio" th:field="*{jenisKelamin}" value="Perempuan"> Perempuan
+            <label class="form-label">Jenis Kelamin:</label>
+            <div class="d-flex gap-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" th:field="*{jenisKelamin}" value="Laki-laki" id="laki" required>
+                    <label class="form-check-label" for="laki">Laki-laki</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" th:field="*{jenisKelamin}" value="Perempuan" id="perempuan" required>
+                    <label class="form-check-label" for="perempuan">Perempuan</label>
+                </div>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a th:href="@{/home}" class="btn btn-secondary">Kembali ke Home</a>
+        </div>
     </form>
-    <br>
-    <a th:href="@{/home}" class="text-primary text-decoration-none">Kembali ke Home</a>
 </div>
 </body>
 </html>
