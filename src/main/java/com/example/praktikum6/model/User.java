@@ -1,4 +1,4 @@
-package com.example.praktikum6.controller;
+package com.example.praktikum6.model;
 
 public class Mahasiswa {
     private String nama;
