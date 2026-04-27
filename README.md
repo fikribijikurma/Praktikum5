@@ -24,3 +24,6 @@ Halaman form
 <img width="2559" height="1472" alt="image" src="https://github.com/user-attachments/assets/edaf7601-7453-4c49-89a4-fbf644e08e3d" />
 Halaman home setelah input
 <img width="2559" height="1468" alt="image" src="https://github.com/user-attachments/assets/29c502e6-5008-40b4-b26c-b60c6c22cd16" />
+
+<img width="2559" height="1471" alt="Screenshot 2026-04-27 100615" src="https://github.com/user-attachments/assets/35e1f059-7825-4fd1-8d13-7aa39fa4c4ba" />
+<img width="2559" height="1411" alt="Screenshot 2026-04-27 111255" src="https://github.com/user-attachments/assets/87162f09-7044-4b7d-aa00-c6190080ce05" />
