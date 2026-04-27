@@ -1,43 +1,203 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Form Input Mahasiswa</title>
+    <title>Pendaftaran - Bali Heritage</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Outfit:wght@400;600&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --bali-gold: #d4af37;
+            --bali-red: #8b0000;
+            --bali-black: #0f0f0f;
+            --bali-grey: #1a1a1a;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bali-black);
+            background-image: url("https://www.transparenttextures.com/patterns/black-linen.png");
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            padding: 2rem;
+        }
+
+        .bali-form-card {
+            background: var(--bali-grey);
+            border: 2px solid var(--bali-gold);
+            border-radius: 4px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 650px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            position: relative;
+        }
+
+        .bali-form-card::before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            pointer-events: none;
+        }
+
+        .bali-header {
+            font-family: 'Playfair Display', serif;
+            color: var(--bali-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 2px solid var(--bali-gold);
+            padding-bottom: 1rem;
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .form-label {
+            color: var(--bali-gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .form-control {
+            background: #252525;
+            border: 1px solid #333;
+            border-radius: 0;
+            color: #fff;
+            padding: 0.9rem 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            background: #2a2a2a;
+            border-color: var(--bali-gold);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+            color: #fff;
+        }
+
+        .gender-container {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .gender-box {
+            flex: 1;
+            padding: 1.5rem;
+            background: #252525;
+            border: 1px solid #333;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .gender-input {
+            display: none;
+        }
+
+        .gender-input:checked+.gender-box {
+            background: rgba(139, 0, 0, 0.1);
+            border-color: var(--bali-gold);
+            box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.1);
+        }
+
+        .gender-input:checked+.gender-box i {
+            color: var(--bali-gold);
+        }
+
+        .btn-bali-submit {
+            background: linear-gradient(135deg, var(--bali-red) 0%, #5d0000 100%);
+            border: 1px solid var(--bali-gold);
+            color: var(--bali-gold);
+            border-radius: 0;
+            padding: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-bali-submit:hover {
+            background: var(--bali-gold);
+            color: var(--bali-black);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-bali-back {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.6);
+            border-radius: 0;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-bali-back:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+        }
+    </style>
 </head>
-<body class="bg-light p-5">
-<div class="container border p-4 bg-white" style="max-width: 600px;">
-    <h5 class="mb-4">Form Input Mahasiswa</h5>
 
-    <form th:action="@{/save}" th:object="${user}" method="post">
-        <div class="mb-3">
-            <label class="form-label">Nama:</label>
-            <input type="text" th:field="*{nama}" class="form-control" placeholder="Masukkan Nama" required>
-        </div>
+<body>
+    <div class="bali-form-card">
+        <h2 class="bali-header">
+            <i class="bi bi-vector-pen"></i>
+            Data Pendaftaran
+        </h2>
 
-        <div class="mb-3">
-            <label class="form-label">NIM:</label>
-            <input type="text" th:field="*{nim}" class="form-control" placeholder="Masukkan NIM" required>
-        </div>
+        <form th:action="@{/save}" th:object="${user}" method="post">
+            <div class="mb-4">
+                <label class="form-label">Nama Mahasiswa</label>
+                <input type="text" th:field="*{nama}" class="form-control" placeholder="Masukkan nama lengkap" required>
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Jenis Kelamin:</label>
-            <div class="d-flex gap-3">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" th:field="*{jenisKelamin}" value="Laki-laki" id="laki" required>
-                    <label class="form-check-label" for="laki">Laki-laki</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" th:field="*{jenisKelamin}" value="Perempuan" id="perempuan" required>
-                    <label class="form-check-label" for="perempuan">Perempuan</label>
+            <div class="mb-4">
+                <label class="form-label">Nomor Induk Mahasiswa (NIM)</label>
+                <input type="text" th:field="*{nim}" class="form-control" placeholder="Masukkan nomor induk" required>
+            </div>
+
+            <div class="mb-5">
+                <label class="form-label">Jenis Kelamin</label>
+                <div class="gender-container">
+                    <div class="w-100">
+                        <input class="gender-input" type="radio" th:field="*{jenisKelamin}" value="Laki-laki"
+                            id="mhs_laki" required>
+                        <label class="gender-box w-100" for="mhs_laki">
+                            <i class="bi bi-gender-male h3 d-block mb-2"></i>
+                            Laki-laki
+                        </label>
+                    </div>
+                    <div class="w-100">
+                        <input class="gender-input" type="radio" th:field="*{jenisKelamin}" value="Perempuan"
+                            id="mhs_perempuan" required>
+                        <label class="gender-box w-100" for="mhs_perempuan">
+                            <i class="bi bi-gender-female h3 d-block mb-2"></i>
+                            Perempuan
+                        </label>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="d-flex gap-2">
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <a th:href="@{/home}" class="btn btn-secondary">Kembali ke Home</a>
-        </div>
-    </form>
-</div>
+            <div class="d-grid gap-3">
+                <button type="submit" class="btn btn-bali-submit">Simpan</button>
+                <a th:href="@{/home}" class="btn btn-bali-back">Kembali ke Halaman Home</a>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

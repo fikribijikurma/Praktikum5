@@ -7,4 +7,5 @@ public class User {
     private String nama;
     private String nim;
     private String jenisKelamin;
+    private String imageUrl;
 }

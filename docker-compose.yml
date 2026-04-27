@@ -1,0 +1,10 @@
+services:
+  praktikum6-app:
+    build: .
+    container_name: praktikum6-container
+    ports:
+      - "8080:8080"
+    volumes:
+      # Persist uploaded photos back to your source code directory
+      - ./src/main/resources/static/img:/app/src/main/resources/static/img
+    restart: always
